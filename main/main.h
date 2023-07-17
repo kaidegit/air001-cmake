@@ -1,0 +1,4 @@
+#ifndef AIR001_CMAKE_MAIN_H
+#define AIR001_CMAKE_MAIN_H
+
+#endif //AIR001_CMAKE_MAIN_H
