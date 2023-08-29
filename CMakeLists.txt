@@ -83,9 +83,10 @@ add_definitions(
 )
 #查找HAL库中非template结尾的文件
 file(GLOB HAL_Lib
-        "Arduino-Air001-Drivers/AIR001xx_HAL_Driver/Src/*[^t][^e][^m][^p][^l][^a][^t][^e].c"
+        "Arduino-Air001-Drivers/AIR001xx_HAL_Driver/Src/*.c"
         Arduino-Air001-Drivers/AIR001xx_HAL_Driver/Src/Legacy/*.c
 )
+list(FILTER HAL_Lib EXCLUDE REGEX ".*template\\.c$")
 
 file(GLOB_RECURSE SOURCES
         main/*.c
@@ -112,3 +113,10 @@ add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
         COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf> ${BIN_FILE}
         COMMENT "Building ${HEX_FILE}
 Building ${BIN_FILE}")
+
+# Air001目前应该是进入了pyocd的develop分支了，以后可能不需要指定包了
+add_custom_target(flash ALL
+        COMMAND pyocd flash --pack ${CMAKE_SOURCE_DIR}/Keil.AIR001_DFP.1.0.1.pack --target air001dev ${HEX_FILE}
+        DEPENDS ${PROJECT_NAME}.elf
+        COMMENT "Flashing ${HEX_FILE}"
+)

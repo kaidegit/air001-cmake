@@ -17,9 +17,9 @@ extern "C" {
 #define HAL_PWR_MODULE_ENABLEDZ
 #define HAL_CORTEX_MODULE_ENABLED
 
-#define HSE_VALUE            8000000U
+#define HSE_VALUE            24000000U
 #define HSE_STARTUP_TIMEOUT  100U
-#define HSI_VALUE            24000000U
+#define HSI_VALUE            8000000U
 #define HSI_STARTUP_TIMEOUT  5000U
 #define LSI_VALUE            32000U
 #define LSE_VALUE            32768U    /*!< Value of the External Low Speed oscillator in Hz */
